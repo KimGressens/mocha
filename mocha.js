@@ -1251,7 +1251,8 @@ require.register("mocha.js", function(module, exports, require){
  */
 
 var path = require('browser/path')
-  , utils = require('./utils');
+  , utils = require('./utils')
+  , requirejs = require("requirejs");
 
 /**
  * Expose `Mocha`.
@@ -1391,7 +1392,7 @@ Mocha.prototype.loadFiles = function(fn){
   this.files.forEach(function(file){
     file = path.resolve(file);
     suite.emit('pre-require', global, file, self);
-    suite.emit('require', require(file), file, self);
+    suite.emit('require', requirejs(file), file, self);
     suite.emit('post-require', global, file, self);
     --pending || (fn && fn());
   });
